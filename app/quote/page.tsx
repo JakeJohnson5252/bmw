@@ -39,24 +39,24 @@ export default function Quote() {
       return;
     }
 
-    // 2️⃣ Trigger email sending (server-side)
-    try {
-      await fetch("/api/send-quote-emails", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          phone,
-          email,
-          service,
-          message,
-        }),
-      });
-    } catch (err) {
-      console.error("Email sending failed:", err);
-      // We do NOT block the user if email fails
-    }
+    // // 2️⃣ Trigger email sending (server-side)
+    // try {
+    //   await fetch("/api/send-quote-emails", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       firstName,
+    //       lastName,
+    //       phone,
+    //       email,
+    //       service,
+    //       message,
+    //     }),
+    //   });
+    // } catch (err) {
+    //   console.error("Email sending failed:", err);
+    //   // We do NOT block the user if email fails
+    // }
 
     // 3️⃣ Redirect to thank-you page
     router.push("/quote/thank-you");
