@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     // 1️⃣ Email to BUSINESS
     await resend.emails.send({
       from: "B&M Landscaping <onboarding@resend.dev>",
-      to: ["contact@bmlandscaping.com"],
+      to: ["jacobnilsjohnson@gmail.com"],
       subject: "New Quote Request",
       html: `
         <h2>New Quote Request</h2>
