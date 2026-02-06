@@ -19,12 +19,12 @@ export default function AdminDashboard() {
             <Link href="/quotepage" className={buttonClass}>
               Quotes
             </Link>
-            <Link href = "/forms" className={buttonClass}>
+            {/* <Link href = "/forms" className={buttonClass}>
               Forms  
             </Link>
             <Link href = "/calendar" className={buttonClass}>
               Calendar  
-            </Link>
+            </Link> */}
           </div>
         </div>
       </header>
