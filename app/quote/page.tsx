@@ -12,6 +12,7 @@ export default function Quote() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState("");
+  const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function Quote() {
         lastName,
         phone,
         email,
+        contact,
         service,
         message,
         status: "New",
@@ -49,6 +51,7 @@ export default function Quote() {
           lastName,
           phone,
           email,
+          contact,
           service,
           message,
         }),
@@ -136,6 +139,24 @@ export default function Quote() {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-black"
             />
+          </div>
+
+
+          <div>
+            <label className="mb-1 block text-sm font-medium">
+              Contact Method
+            </label>
+            <select
+              required
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 dark:border-zinc-700 dark:bg-black"
+            >
+              <option value="">Select a contact method</option>
+              <option value="Phone">Phone</option>
+              <option value="Email">Email</option>
+              <option value="Either">Either</option>
+            </select>
           </div>
 
           <div>

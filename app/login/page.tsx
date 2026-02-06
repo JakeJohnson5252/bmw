@@ -20,7 +20,7 @@ export default function AdminLogin() {
     if (session) {
       const sessionData = JSON.parse(session);
       if (Date.now() < sessionData.expiresAt) {
-        router.push('/admin');
+        router.push('/admindashboard');
       } else {
         localStorage.removeItem(SESSION_KEY);
       }
@@ -33,7 +33,7 @@ export default function AdminLogin() {
       // Set session
       const expiresAt = Date.now() + SESSION_TIMEOUT;
       localStorage.setItem(SESSION_KEY, JSON.stringify({ expiresAt }));
-      router.push('/admin');
+      router.push('/admindashboard');
     } else {
       setError('Incorrect password');
     }
