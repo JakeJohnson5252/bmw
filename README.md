@@ -1,16 +1,18 @@
 Link to website: https://bmlw.vercel.app/
 
 
-CSC468 - Project Deliverable 1
+### CSC468 - Project Deliverable 1
 
-# Landscaping Scheduler Project
+
+## Proposal
+
+This project is an add-on to a landscaping website that I am currently developing. One feature I will be adding to the website is having a calender where the user can select a timeslot where someone would come give them an estimate. Based on this interaction, I plan on using Node images.
+
 
 ## Vision
 
-This project is a web application that allows users to select available timeslots for receiving an estimate for a landscaping job. It consists of two main components: the frontend web app and the backend database/API hosted on Supabase. The frontend communicates with the backend via REST API calls.
-
 ```mermaid
 flowchart LR
-    A[Frontend: TS/JS Schedule UI] -->|REST API| B[Backend: Supabase DB + API]
+    A[Frontend: TSX/JSX UI] -->|REST API| B[Backend: Supabase DB + API]
 
 
