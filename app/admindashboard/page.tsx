@@ -11,20 +11,25 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className="border-b border-emerald-200/60 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <h1 className="text-2xl font-bold tracking-tight">
+            <a href="/">
+            B&amp;M Landscaping
+            </a>
+          </h1>
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
           <div className="flex gap-4">
             <Link href="/" className={buttonClass}>
               Home
             </Link>
-            <Link href="/quotepage" className={buttonClass}>
+            <Link href="/admindashboard/quotepage" className={buttonClass}>
               Quotes
             </Link>
-            {/* <Link href = "/forms" className={buttonClass}>
+            <Link href = "/admindashboard/forms" className={buttonClass}>
               Forms  
             </Link>
-            <Link href = "/calendar" className={buttonClass}>
+            <Link href = "/admindashboard/calendar" className={buttonClass}>
               Calendar  
-            </Link> */}
+            </Link>
           </div>
         </div>
       </header>

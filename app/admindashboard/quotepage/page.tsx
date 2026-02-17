@@ -10,6 +10,7 @@ type Quote = {
   lastName: string;
   email: string;
   phone: string;
+  contactMethod: string;
   service: string;
   message: string;
   status: string;
@@ -74,10 +75,10 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-zinc-50 p-8 dark:bg-black">
       <Link
-        href="/"
+        href="/admindashboard"
         className="mb-6 inline-block rounded-md bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
       >
-        ← Back to Home
+        ← Back to Dashboard
       </Link>
 
       <h1 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -110,6 +111,7 @@ export default function AdminPage() {
                 <th className="border-b px-4 py-3 text-left font-medium">Name</th>
                 <th className="border-b px-4 py-3 text-left font-medium">Email</th>
                 <th className="border-b px-4 py-3 text-left font-medium">Phone</th>
+                <th className="border-b px-4 py-3 text-left font-medium">Contact Method</th>
                 <th className="border-b px-4 py-3 text-left font-medium">Service</th>
                 <th className="border-b px-4 py-3 text-left font-medium">Message</th>
                 <th className="border-b px-4 py-3 text-left font-medium">Status</th>
@@ -123,6 +125,7 @@ export default function AdminPage() {
                   <td className="px-4 py-2">{quote.firstName} {quote.lastName}</td>
                   <td className="px-4 py-2">{quote.email}</td>
                   <td className="px-4 py-2">{quote.phone}</td>
+                  <td className="px-4 py-2">{quote.contactMethod}</td>
                   <td className="px-4 py-2">{quote.service}</td>
                   <td className="px-4 py-2">{quote.message}</td>
                   <td className="px-4 py-2">

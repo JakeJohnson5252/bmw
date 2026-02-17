@@ -44,6 +44,11 @@ export default function AdminLogin() {
       <div className="w-full max-w-md">
         {/* Back to Home */}
         <div className="mb-6 text-left">
+          <h1 className="text-2xl font-bold tracking-tight">
+            <a href="/">
+            B&amp;M Landscaping
+            </a>
+          </h1>
           <Link
             href="/"
             className="inline-block rounded-md bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
