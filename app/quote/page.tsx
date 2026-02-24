@@ -17,6 +17,10 @@ export default function Quote() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+
+  const generateQuoteNumber = () =>
+    Math.floor(10000 + Math.random() * 90000).toString();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -32,6 +36,7 @@ export default function Quote() {
         service,
         message,
         status: "New",
+        quote_number: generateQuoteNumber(),
       },
     ]);
 
@@ -54,6 +59,7 @@ export default function Quote() {
           contact,
           service,
           message,
+          quoteNumber: generateQuoteNumber(),
         }),
       });
     } catch (err) {

@@ -1,24 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
-export default function CalendarPage() {
+export default function AdminCalendarPage() {
   const buttonClass =
     "rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500";
 
-  // State
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [events, setEvents] = useState<{ [key: string]: { type: "quote" | "estimate"; text: string }[] }>({});
+  const [loading, setLoading] = useState(true);
 
-  // Example scheduled events (replace with database later)
-  const events = {
-    "2026-02-17": ["Lawn mowing - Smith residence", "Estimate - Johnson"],
-    "2026-02-20": ["Mulching job - Brown property"],
-    "2026-03-05": ["Tree trimming - Wilson"],
-  };
-
-  // Helpers
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
@@ -29,43 +23,87 @@ export default function CalendarPage() {
     month: "long",
   });
 
-  const changeMonth = (offset) => {
+  const changeMonth = (offset: number) => {
     setCurrentDate(new Date(year, month + offset, 1));
     setSelectedDate(null);
   };
 
-  const formatDateKey = (day) => {
+  const formatDateKey = (day: number) => {
     const m = String(month + 1).padStart(2, "0");
     const d = String(day).padStart(2, "0");
     return `${year}-${m}-${d}`;
   };
 
-  // Generate calendar cells
-  const cells = [];
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setLoading(true);
 
+      const { data: quotesData } = await supabase
+        .from("Quotes")
+        .select("firstName,lastName,service,quote_number,created_at");
+
+      const { data: bookingsData } = await supabase
+        .from("estimate_bookings")
+        .select("quote_number,booking_date,booking_time");
+
+      const tempEvents: { [key: string]: { type: "quote" | "estimate"; text: string }[] } = {};
+
+      if (quotesData) {
+        quotesData.forEach((q: any) => {
+          const date = new Date(q.created_at);
+          const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+          if (!tempEvents[key]) tempEvents[key] = [];
+          tempEvents[key].push({ type: "quote", text: `Quote - ${q.firstName} ${q.lastName} (#${q.quote_number})` });
+        });
+      }
+
+      if (bookingsData) {
+        bookingsData.forEach((b: any) => {
+          const key = b.booking_date;
+          if (!tempEvents[key]) tempEvents[key] = [];
+          tempEvents[key].push({ type: "estimate", text: `Estimate Booking (#${b.quote_number}) at ${b.booking_time}` });
+        });
+      }
+
+      setEvents(tempEvents);
+      setLoading(false);
+    };
+
+    fetchEvents();
+  }, [currentDate]);
+
+  const cells = [];
   for (let i = 0; i < firstDayOfMonth; i++) {
     cells.push(<div key={`empty-${i}`} />);
   }
-
   for (let day = 1; day <= daysInMonth; day++) {
     const key = formatDateKey(day);
-    const hasEvent = events[key];
+    const dayEvents = events[key];
+    const hasEvent = dayEvents && dayEvents.length > 0;
+
+    // Determine day background color based on event type
+    let dayClass = "bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700";
+    if (hasEvent) {
+      const types = dayEvents.map(e => e.type);
+      if (types.includes("estimate") && types.includes("quote")) {
+        dayClass = "bg-gradient-to-br from-emerald-100 via-blue-100 to-emerald-100 border-emerald-400";
+      } else if (types.includes("estimate")) {
+        dayClass = "bg-blue-100 border-blue-400 hover:bg-blue-200";
+      } else if (types.includes("quote")) {
+        dayClass = "bg-emerald-100 border-emerald-400 hover:bg-emerald-200";
+      }
+    }
 
     cells.push(
       <button
         key={day}
         onClick={() => setSelectedDate(key)}
-        className={`h-16 rounded-lg border text-sm transition
-          ${hasEvent
-            ? "bg-emerald-100 border-emerald-400 hover:bg-emerald-200"
-            : "bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700"
-          }
-        `}
+        className={`h-16 rounded-lg border text-sm transition ${dayClass}`}
       >
         <div className="font-semibold">{day}</div>
         {hasEvent && (
-          <div className="text-xs text-emerald-700">
-            {hasEvent.length} event{hasEvent.length > 1 ? "s" : ""}
+          <div className="text-xs text-zinc-700">
+            {dayEvents.length} event{dayEvents.length > 1 ? "s" : ""}
           </div>
         )}
       </button>
@@ -80,7 +118,7 @@ export default function CalendarPage() {
           <h1 className="text-2xl font-bold tracking-tight">
             <a href="/">B&amp;M Landscaping</a>
           </h1>
-          <h1 className="text-2xl font-bold">Calendar</h1>
+          <h1 className="text-2xl font-bold">Admin Calendar</h1>
           <div className="flex gap-4">
             <Link href="/admindashboard" className={buttonClass}>
               Dashboard
@@ -91,7 +129,6 @@ export default function CalendarPage() {
 
       {/* Calendar */}
       <main className="mx-auto max-w-4xl px-6 py-10">
-
         {/* Month Navigation */}
         <div className="flex items-center justify-between mb-6">
           <button
@@ -100,11 +137,7 @@ export default function CalendarPage() {
           >
             ← Previous
           </button>
-
-          <h2 className="text-2xl font-bold">
-            {monthName} {year}
-          </h2>
-
+          <h2 className="text-2xl font-bold">{monthName} {year}</h2>
           <button
             onClick={() => changeMonth(1)}
             className="px-4 py-2 bg-gray-200 dark:bg-zinc-800 rounded hover:bg-gray-300"
@@ -125,21 +158,30 @@ export default function CalendarPage() {
         </div>
 
         {/* Calendar grid */}
-        <div className="grid grid-cols-7 gap-2">
-          {cells}
-        </div>
+        {loading ? (
+          <p className="text-center py-10">Loading...</p>
+        ) : (
+          <div className="grid grid-cols-7 gap-2">{cells}</div>
+        )}
 
         {/* Selected Day Popup */}
         {selectedDate && (
           <div className="mt-6 p-4 border rounded-lg bg-white dark:bg-zinc-900 shadow">
-            <h3 className="font-bold mb-2">
-              Schedule for {selectedDate}
-            </h3>
+            <h3 className="font-bold mb-2">Schedule for {selectedDate}</h3>
 
             {events[selectedDate] ? (
-              <ul className="list-disc ml-5">
+              <ul className="ml-5 space-y-1">
                 {events[selectedDate].map((event, i) => (
-                  <li key={i}>{event}</li>
+                  <li
+                    key={i}
+                    className={`px-2 py-1 rounded text-sm ${
+                      event.type === "quote"
+                        ? "bg-emerald-100 text-emerald-800"
+                        : "bg-blue-100 text-blue-800"
+                    }`}
+                  >
+                    {event.text}
+                  </li>
                 ))}
               </ul>
             ) : (
