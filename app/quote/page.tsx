@@ -25,6 +25,7 @@ export default function Quote() {
     e.preventDefault();
     setLoading(true);
 
+    const newQuoteNumber = generateQuoteNumber();
     // 1️⃣ Save quote to Supabase
     const { error } = await supabase.from("Quotes").insert([
       {
@@ -36,7 +37,7 @@ export default function Quote() {
         service,
         message,
         status: "New",
-        quote_number: generateQuoteNumber(),
+        quote_number: newQuoteNumber,
       },
     ]);
 
@@ -46,29 +47,8 @@ export default function Quote() {
       return;
     }
 
-    // 2️⃣ Trigger email sending (server-side)
-    try {
-      await fetch("/api/send-quote-emails", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          phone,
-          email,
-          contact,
-          service,
-          message,
-          quoteNumber: generateQuoteNumber(),
-        }),
-      });
-    } catch (err) {
-      console.error("Email sending failed:", err);
-      // We do NOT block the user if email fails
-    }
-
     // 3️⃣ Redirect to thank-you page
-    router.push("/quote/thank-you");
+    router.push(`/quote/thank-you?quote_number=${newQuoteNumber}`);
     setLoading(false);
   };
 

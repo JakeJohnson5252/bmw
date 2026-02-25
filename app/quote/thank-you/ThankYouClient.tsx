@@ -5,18 +5,31 @@ import { useSearchParams } from "next/navigation";
 
 export default function ThankYouClient() {
   const params = useSearchParams();
-  const quoteNumber = params.get("Quote");
+  const quoteNumber = params.get("quote_number"); // get from URL
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-      <div className="max-w-md rounded-2xl border border-zinc-200 bg-white p-8 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
-        <h1 className="mb-2 text-2xl font-bold">Thank You!</h1>
-        <p className="mb-2 text-sm text-zinc-500">
-          Your quote request has been received. Your quote number is:
+    <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-black px-6 py-10">
+      <div className="max-w-md w-full rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 text-center">
+        <h1 className="mb-4 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+          Thank You!
+        </h1>
+
+        <p className="mb-2 text-sm text-zinc-500 dark:text-zinc-400">
+          Your quote request has been received. 
         </p>
-        <p className="mb-6 font-bold text-lg text-emerald-600">{quoteNumber}</p>
-        <p className="mb-6 text-sm text-zinc-500">
-          Use this quote number when booking your estimate.
+
+        {quoteNumber ? (
+          <p className="mb-6 text-lg font-bold text-emerald-600">
+            Quote Number: {quoteNumber}
+          </p>
+        ) : (
+          <p className="mb-6 text-sm text-red-500">
+            Unable to retrieve your quote number.
+          </p>
+        )}
+
+        <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
+          Please save this number. You will need it when booking your estimate.
         </p>
 
         <Link
