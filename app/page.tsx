@@ -48,22 +48,27 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-[500px] md:h-[600px]">
-
-        
-        <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-6">
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-            Transforming Outdoor Spaces
-          </h2>
-          <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl">
-            Residential and commercial landscaping delivering clean, high-quality work that beautifies your property.
-          </p>
-          <div className="flex gap-4 flex-wrap justify-center">
-            <Link href="/quote" className={primaryButton}>Get a Free Quote</Link>
-            <Link href="/estimate" className={outlineButton}>Book an Estimate</Link>
-          </div>
+    <section
+      className="relative h-[400px] md:h-[500px] lg:h-[600px] bg-cover bg-center"
+      style={{ backgroundImage: 'url("/car.jpeg")' }} 
+    >
+      <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-6">
+        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
+          Transforming Outdoor Spaces
+        </h2>
+        <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl">
+          Residential and commercial landscaping delivering clean, high-quality work that beautifies your property.
+        </p>
+        <div className="flex gap-4 flex-wrap justify-center">
+          <Link href="/quote" className={primaryButton}>
+            Get a Free Quote
+          </Link>
+          <Link href="/estimate" className={primaryButton}>
+            Book an Estimate
+          </Link>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Services Section */}
       <section className="mx-auto max-w-6xl px-6 py-20">
