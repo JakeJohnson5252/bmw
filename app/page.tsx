@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Home() {
   const [phoneMode, setPhoneMode] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
  
 
   const primaryButton =
