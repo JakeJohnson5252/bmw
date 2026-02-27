@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function Home() {
   const [phoneMode, setPhoneMode] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
  
 
   const primaryButton =
@@ -17,92 +18,184 @@ export default function Home() {
   const services = [
     { title: "Weeding", description: "Keep your garden pristine with expert weeding.", img: "/weeding.jpg" },
     { title: "Mulching", description: "Enhance soil health and appearance with mulching.", img: "/mulching.jpg" },
-    { title: "Power Washing", description: "Restore surfaces to their original shine.", img: "/powerwash.jpg" },
-    { title: "Mowing", description: "Perfectly manicured lawns every time.", img: "/mowing.jpg" },
+    { title: "Power Washing", description: "Restore surfaces to their original shine.", img: "/powerwashing.jpg" },
+    { title: "Mowing", description: "Perfectly manicured lawns every time.", img: "/mowing1.jpg" },
   ];
 
+  const galleryImages = ["/before.jpg","/after.jpg","/pwbefore.jpeg","/pwafter.jpeg", "/mulching1.jpg", "/mulching2.jpg", "/powerwashing1.jpg", "/mulching3.jpg", "/mulching4.jpg", "/trimming.jpg", "/mulching5.jpg", "/mulching6.jpg"];
 
+
+ 
   return (
     <div className={`mx-auto min-h-screen flex-col font-sans text-zinc-900 dark:text-zinc-100
       bg-gradient-to-b from-emerald-50 via-white to-zinc-100 dark:from-zinc-950 dark:via-black dark:to-black
       ${phoneMode ? "max-w-[375px] border-x border-emerald-300 dark:border-zinc-800" : ""}`}>
 
       {/* Header */}
-      <header className="border-b border-emerald-200/60 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90 sticky top-0 z-50">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <h1 className="text-2xl font-bold tracking-tight hover:text-emerald-600 transition">
-            <Link href="/">B&M Landscaping</Link>
-          </h1>
+      <header className="border-b border-emerald-200/60 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90 sticky z-45">
+        <div className="flex items-center justify-between pl-15 pr-20 py-5">          
+          {/* Logo + Title */}
+          <div className="flex items-center gap-3">
+            <img
+              src="/logo.jpg"
+              alt="B&M Landscaping Logo"
+              className="w-40 h-40 object-contain rounded-full"
+            />
+            <h1 className="text-2xl font-extrabold tracking-tight hover:text-emerald-600 transition">
+              <Link href="/">B&M Landscaping</Link>
+            </h1>
+          </div>
+
           <div className="flex items-center gap-6">
             <div className="flex gap-2">
-              <button onClick={() => setPhoneMode(false)} className={phoneMode ? outlineButton : primaryButton}>PC</button>
-              <button onClick={() => setPhoneMode(true)} className={phoneMode ? primaryButton : outlineButton}>Phone</button>
+              <button 
+                onClick={() => setPhoneMode(false)} 
+                className={phoneMode ? outlineButton : primaryButton}
+              >
+                PC
+              </button>
+              <button 
+                onClick={() => setPhoneMode(true)} 
+                className={phoneMode ? primaryButton : outlineButton}
+              >
+                Phone
+              </button>
             </div>
+
             <div className="flex gap-3 flex-wrap">
               <Link href="/quote" className={primaryButton}>Request a Quote</Link>
               <Link href="/estimate" className={primaryButton}>Book an Estimate</Link>
               <Link href="/login" className={primaryButton}>Admin Dashboard</Link>
             </div>
           </div>
+
         </div>
       </header>
 
       {/* Hero Section */}
-    <section
-      className="relative h-[400px] md:h-[500px] lg:h-[600px] bg-cover bg-center"
-      style={{ backgroundImage: 'url("/car.jpeg")' }} 
-    >
-      <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-6">
-        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-          Transforming Outdoor Spaces
-        </h2>
-        <p className="text-lg md:text-2xl text-white/90 mb-6 max-w-2xl">
-          Residential and commercial landscaping delivering clean, high-quality work that beautifies your property.
-        </p>
-        <div className="flex gap-4 flex-wrap justify-center">
-          <Link href="/quote" className={primaryButton}>
-            Get a Free Quote
-          </Link>
-          <Link href="/estimate" className={primaryButton}>
-            Book an Estimate
-          </Link>
-        </div>
-      </div>
-    </section>
+      <section className="flex justify-center py-10 md:py-16 lg:py-20">
+        <div className="relative w-full max-w-7xl rounded-3xl overflow-hidden shadow-lg">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'url("/car.jpeg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
 
-      {/* Services Section */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <h3 className="text-4xl font-bold text-center mb-12 border-b-4 border-emerald-500 inline-block pb-2">
-          Our Services
-        </h3>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, idx) => (
-            <div key={idx} className="bg-white dark:bg-zinc-900 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-              <div className="relative h-48">
-                <Image src={service.img} alt={service.title} fill className="object-cover" />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Content */}
+          <div className="relative px-10 py-30 md:py-38 flex flex-col justify-between items-center text-center h-full">
+            
+            {/* Top line with lighter shadow box */}
+            <div className="bg-black/25 backdrop-blur-md px-6 py-4 rounded-xl shadow-lg mb-10">
+              <h2 className="text-4xl md:text-6xl font-extrabold text-white">
+                Transforming Outdoor Spaces
+              </h2>
+            </div>
+
+            {/* Bottom section with lighter shadow box */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="bg-black/25 backdrop-blur-md px-6 py-4 rounded-xl shadow-lg mb-6 max-w-2xl">
+                <p className="text-lg md:text-2xl text-white/90">
+                  Residential and commercial landscaping delivering clean, high-quality work that beautifies your property.
+                </p>
               </div>
-              <div className="p-6">
-                <h4 className="text-xl font-semibold mb-2">{service.title}</h4>
-                <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
+
+              <div className="flex gap-4 flex-wrap justify-center">
+                <Link href="/quote" className={primaryButton}>
+                  Get a Free Quote
+                </Link>
+                <Link href="/estimate" className={primaryButton}>
+                  Book an Estimate
+                </Link>
               </div>
             </div>
-          ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-6xl bg-emerald-600 rounded-3xl shadow-2xl px-8 py-16">
+
+          <h3 className="text-4xl font-bold text-center text-white mb-14 border-b-4 border-white inline-block pb-2">
+            Our Services
+          </h3>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300"
+              >
+                <div className="relative h-48 rounded-t-2xl overflow-hidden border-4 border-white">
+                  <Image
+                    src={service.img}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="p-6">
+                  <h4 className="text-xl font-semibold mb-2">
+                    {service.title}
+                  </h4>
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
       {/* Gallery Section */}
       <section className="mx-auto max-w-6xl px-6 py-20">
         <h3 className="text-4xl font-bold text-center mb-12 border-b-4 border-emerald-500 inline-block pb-2">Gallery</h3>
-        <div className="grid gap-6 md:grid-cols-3 auto-rows-[200px]">
-          {["/before.jpg","/after.jpg","/mulch1.jpeg","/mulch2.jpeg","/pwbefore.jpeg","/pwafter.jpeg","/mow1.jpeg","/mow2.jpeg","/mow3.jpeg"].map((src, idx) => (
-            <div key={idx} className="relative group overflow-hidden rounded-2xl shadow-lg">
-              <Image src={src} alt="Gallery image" fill className="object-cover transition duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white font-semibold">
-                {`Project ${idx + 1}`}
-              </div>
+        <div className="grid gap-6 md:grid-cols-4 auto-rows-[200px]">
+          {galleryImages.map((src, idx) => (
+            <div
+              key={idx}
+              className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer"
+              onClick={() => setSelectedImage(src)}
+            >
+              <Image
+                src={src}
+                alt="Gallery image"
+                fill
+                className="object-cover transition duration-700 group-hover:scale-110"
+              />
             </div>
           ))}
         </div>
+
+        {/* Modal */}
+        {selectedImage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-emerald-400"
+            >
+              &times;
+            </button>
+            <div className="relative w-full max-w-4xl h-[70vh] md:h-[90vh]">
+              <Image
+                src={selectedImage}
+                alt="Enlarged image"
+                fill
+                className="object-contain rounded-2xl"
+              />
+            </div>
+          </div>
+        )}
       </section>
 
 
@@ -117,16 +210,14 @@ export default function Home() {
           {/* Testimonials Grid */}
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { name: "John D.", quote: "B&M Landscaping transformed my backyard into a paradise!" },
-              { name: "Sarah P.", quote: "Professional, punctual, and amazing results every time." },
-              { name: "Michael R.", quote: "Highly recommend their services for residential and commercial spaces." },
+              { quote: "Ben and Andrew did a great job installing concrete pavers as well as edging my flower beds for me. They were on time, clean/neat, and ensured I was satisfied with the work. I can’t recommend them enough. Thanks guys!" },
+              { quote: "Definitely highly recommend these guys. They are conscientious and hard workers." },
             ].map((t, idx) => (
               <div
                 key={idx}
                 className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-md hover:shadow-xl transition"
               >
                 <p className="text-zinc-600 dark:text-zinc-400 mb-4">"{t.quote}"</p>
-                <p className="font-semibold text-emerald-600 dark:text-emerald-400">- {t.name}</p>
               </div>
             ))}
           </div>
@@ -153,9 +244,9 @@ export default function Home() {
           <div>
             <h4 className="mb-3 font-semibold">Contact & Social</h4>
             <div className="space-y-2 text-sm">
-              <a href="mailto:bmlandscaping@gmail.com" className="block hover:text-emerald-600 transition">Email Us</a>
-              <a href="https://instagram.com/brownmcgurrin_ls" target="_blank" rel="noopener noreferrer" className="block hover:text-emerald-600 transition">Instagram</a>
-              <a href="https://facebook.com/BrownMcGurrinLandscapingServices" target="_blank" rel="noopener noreferrer" className="block hover:text-emerald-600 transition">Facebook</a>
+              <a href="mailto:bmlandscaping@gmail.com" className="block hover:text-emerald-600 transition">Email Us: bmlandscaping@gmail.com</a>
+              <a href="https://instagram.com/brownmcgurrin_ls" target="_blank" rel="noopener noreferrer" className="block hover:text-emerald-600 transition">Instagram: brownmcgurrin_ls</a>
+              <a href="https://facebook.com/BrownMcGurrinLandscapingServices" target="_blank" rel="noopener noreferrer" className="block hover:text-emerald-600 transition">Facebook: BrownMcGurrinLandscapingServices</a>
             </div>
           </div>
         </div>
