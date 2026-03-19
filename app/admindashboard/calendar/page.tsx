@@ -196,7 +196,9 @@ export default function AdminCalendarPage() {
                     className={`px-2 py-1 rounded text-sm ${
                       event.type === "quote"
                         ? "bg-emerald-100 text-emerald-800"
-                        : "bg-blue-100 text-blue-800"
+                        : event.type === "estimate"
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-yellow-100 border-yellow-400 hover:bg-yellow-200"
                     }`}
                   >
                     {event.text}
