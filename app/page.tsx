@@ -19,7 +19,7 @@ export default function Home() {
     { title: "Weeding", description: "Keep your garden pristine with expert weeding.", img: "/weeding.jpg" },
     { title: "Mulching", description: "Enhance soil health and appearance with mulching.", img: "/mulching.jpg" },
     { title: "Power Washing", description: "Restore surfaces to their original shine.", img: "/powerwashing.jpg" },
-    { title: "Mowing", description: "Perfectly manicured lawns every time.", img: "/mowing1.jpg" },
+    { title: "Mowing", description: "Perfectly manicured lawns every time.", img: "/mowedlawn.jpg" },
   ];
 
   const galleryImages = ["/before.jpg","/after.jpg","/pwbefore.jpeg","/pwafter.jpeg", "/mulching1.jpg", "/mulching2.jpg", "/powerwashing1.jpg", "/mulching3.jpg", "/mulching4.jpg", "/trimming.jpg", "/mulching5.jpg", "/mulching6.jpg"];

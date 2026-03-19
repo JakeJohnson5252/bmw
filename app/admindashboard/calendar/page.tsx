@@ -10,7 +10,7 @@ export default function AdminCalendarPage() {
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [events, setEvents] = useState<{ [key: string]: { type: "quote" | "estimate"; text: string }[] }>({});
+  const [events, setEvents] = useState<{ [key: string]: { type: "quote" | "estimate" | "job"; text: string }[] }>({});
   const [loading, setLoading] = useState(true);
 
   const year = currentDate.getFullYear();
@@ -42,11 +42,14 @@ export default function AdminCalendarPage() {
         .from("Quotes")
         .select("firstName,lastName,service,quote_number,created_at");
 
+      const { data: jobsData } = await supabase
+        .from("jobs")
+        .select("name,date");
       const { data: bookingsData } = await supabase
         .from("estimate_bookings")
         .select("quote_number,booking_date,booking_time");
 
-      const tempEvents: { [key: string]: { type: "quote" | "estimate"; text: string }[] } = {};
+      const tempEvents: { [key: string]: { type: "quote" | "estimate" | "job"; text: string }[] } = {};
 
       if (quotesData) {
         quotesData.forEach((q: any) => {
@@ -54,6 +57,14 @@ export default function AdminCalendarPage() {
           const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
           if (!tempEvents[key]) tempEvents[key] = [];
           tempEvents[key].push({ type: "quote", text: `Quote - ${q.firstName} ${q.lastName} (#${q.quote_number})` });
+        });
+      }
+
+      if (jobsData) {
+        jobsData.forEach((j: any) => {
+          const key = j.date;
+          if (!tempEvents[key]) tempEvents[key] = [];
+          tempEvents[key].push({ type: "job", text: `Job - ${j.name}` });
         });
       }
 
@@ -85,12 +96,20 @@ export default function AdminCalendarPage() {
     let dayClass = "bg-white dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700";
     if (hasEvent) {
       const types = dayEvents.map(e => e.type);
-      if (types.includes("estimate") && types.includes("quote")) {
-        dayClass = "bg-gradient-to-br from-emerald-100 via-blue-100 to-emerald-100 border-emerald-400";
+      if (types.includes("estimate") && types.includes("quote") && types.includes("job")) {
+        dayClass = "bg-purple-100 border-purple-400 hover:bg-purple-200";
+      } else if (types.includes("estimate") && types.includes("quote")) {
+        dayClass = "bg-indigo-100 border-indigo-400 hover:bg-indigo-200";
+      } else if (types.includes("quote") && types.includes("job")) {
+        dayClass = "bg-orange-100 border-orange-400 hover:bg-orange-200";
+      } else if (types.includes("estimate") && types.includes("job")) {
+        dayClass = "bg-teal-100 border-teal-400 hover:bg-teal-200";
       } else if (types.includes("estimate")) {
         dayClass = "bg-blue-100 border-blue-400 hover:bg-blue-200";
       } else if (types.includes("quote")) {
         dayClass = "bg-emerald-100 border-emerald-400 hover:bg-emerald-200";
+      } else if (types.includes("job")) {
+        dayClass = "bg-yellow-100 border-yellow-400 hover:bg-yellow-200";
       }
     }
 
