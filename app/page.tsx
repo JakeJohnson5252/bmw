@@ -62,11 +62,26 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="flex gap-3 flex-wrap">
-              <Link href="/quote" className={primaryButton}>Request a Quote</Link>
-              <Link href="/estimate" className={primaryButton}>Book an Estimate</Link>
-              <Link href="/login" className={primaryButton}>Admin Dashboard</Link>
-            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/quote"
+              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
+            >
+              Request a Quote
+            </Link>
+            <Link
+              href="/estimate"
+              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
+            >
+              Book an Estimate
+            </Link>
+            <Link
+              href="/login"
+              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
+            >
+              Admin Dashboard
+            </Link>
+          </div>
           </div>
 
         </div>
@@ -160,8 +175,10 @@ export default function Home() {
       {/* Gallery Section */}
       <section className="mx-auto max-w-6xl px-6 py-20">
         <h3 className="text-4xl font-bold text-center mb-12 border-b-4 border-emerald-500 inline-block pb-2">Gallery</h3>
-        <div className="grid gap-6 md:grid-cols-4 auto-rows-[200px]">
-          {galleryImages.map((src, idx) => (
+        
+        {/* Display first 4 images */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 auto-rows-[200px]">
+          {galleryImages.slice(0, 4).map((src, idx) => (
             <div
               key={idx}
               className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer"
@@ -169,12 +186,19 @@ export default function Home() {
             >
               <Image
                 src={src}
-                alt="Gallery image"
+                alt={`Gallery image ${idx + 1}`}
                 fill
                 className="object-cover transition duration-700 group-hover:scale-110"
               />
             </div>
           ))}
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-4 justify-center mt-8">
+          <Link href="/full-gallery" className={    "rounded-md bg-emerald-600 px-10 py-4 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-500 hover:shadow-lg"}>
+            View Full Gallery
+          </Link>
         </div>
 
         {/* Modal */}
