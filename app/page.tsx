@@ -46,43 +46,61 @@ export default function Home() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setPhoneMode(false)} 
-                className={phoneMode ? outlineButton : primaryButton}
-              >
-                PC
-              </button>
-              <button 
-                onClick={() => setPhoneMode(true)} 
-                className={phoneMode ? primaryButton : outlineButton}
-              >
-                Phone
-              </button>
-            </div>
+          {phoneMode ? (
+            <div className="flex flex-col items-center gap-3 mt-4">
+              {/* PC / Phone toggle */}
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => setPhoneMode(false)} 
+                  className={outlineButton}
+                >
+                  PC
+                </button>
+                <button 
+                  onClick={() => setPhoneMode(true)} 
+                  className={primaryButton}
+                >
+                  Phone
+                </button>
+              </div>
 
-            <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/quote"
-              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
-            >
-              Request a Quote
-            </Link>
-            <Link
-              href="/estimate"
-              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
-            >
-              Book an Estimate
-            </Link>
-            <Link
-              href="/login"
-              className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}
-            >
-              Admin Dashboard
-            </Link>
-          </div>
-          </div>
+              {/* Main action buttons */}
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link href="/quote" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Request a Quote
+                </Link>
+                <Link href="/estimate" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Book an Estimate
+                </Link>
+                <Link href="/login" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Admin Dashboard
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-6">
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => setPhoneMode(false)} 
+                  className={primaryButton}
+                >
+                  PC
+                </button>
+                <button 
+                  onClick={() => setPhoneMode(true)} 
+                  className={outlineButton}
+                >
+                  Phone
+                </button>
+              </div>
+
+              <div className="flex gap-3 flex-wrap">
+                <Link href="/quote" className={primaryButton}>Request a Quote</Link>
+                <Link href="/estimate" className={primaryButton}>Book an Estimate</Link>
+                <Link href="/login" className={primaryButton}>Admin Dashboard</Link>
+              </div>
+            </div>
+          )}
 
         </div>
       </header>
