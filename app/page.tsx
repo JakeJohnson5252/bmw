@@ -33,21 +33,22 @@ export default function Home() {
 
       {/* Header */}
       <header className="border-b border-emerald-200/60 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90 sticky z-45">
-        <div className="flex items-center justify-between pl-15 pr-20 py-5">          
+        <div className="flex flex-col items-center py-5 px-4">
           {/* Logo + Title */}
           <div className="flex items-center gap-3">
             <img
               src="/logo.jpg"
               alt="B&M Landscaping Logo"
-              className="w-40 h-40 object-contain rounded-full"
+              className={`${phoneMode ? 'w-32 h-32' : 'w-40 h-40'} object-contain rounded-full`}
             />
             <h1 className="text-2xl font-extrabold tracking-tight hover:text-emerald-600 transition">
               <Link href="/">B&M Landscaping</Link>
             </h1>
           </div>
 
-          {phoneMode ? (
-            <div className="flex flex-col items-center gap-3 mt-4">
+          {/* Buttons */}
+          {phoneMode && (
+            <div className="flex flex-col items-center gap-3 mt-4 w-full">
               {/* PC / Phone toggle */}
               <div className="flex gap-2">
                 <button 
@@ -65,7 +66,7 @@ export default function Home() {
               </div>
 
               {/* Main action buttons */}
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-3 mt-2">
                 <Link href="/quote" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
                   Request a Quote
                 </Link>
@@ -77,8 +78,11 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-          ) : (
-            <div className="flex items-center gap-6">
+          )}
+
+          {/* PC mode buttons stay on the right */}
+          {!phoneMode && (
+            <div className="flex items-center gap-6 mt-2">
               <div className="flex gap-2">
                 <button 
                   onClick={() => setPhoneMode(false)} 
@@ -101,7 +105,7 @@ export default function Home() {
               </div>
             </div>
           )}
-
+          
         </div>
       </header>
 
