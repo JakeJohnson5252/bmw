@@ -14,7 +14,7 @@ This project is an add-on to a landscaping website that I am currently developin
 ```mermaid
 flowchart LR
     A[Frontend: TSX/JSX UI] -->|REST API| B[Backend: Supabase DB + API]
-
+```
 
 # CSC468 - Project Deliverable 2
 
@@ -28,6 +28,6 @@ RUN npm install
 COPY . .
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
-
+```
 
 
