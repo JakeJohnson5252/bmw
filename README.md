@@ -31,4 +31,22 @@ EXPOSE 3000
 CMD ["npm", "run", "dev"]
 ```
 
+The base image is Node 20 Apline. Node 20 is required for Next.js 16+ and Supabase libraries. I chose Alpine because it is lightweight and it reduces build time.
+---
+All commands after "WORKDIR /app" will run in /app. 
+---
+"COPY package*.json ./" copies package.json and package-lock.json first. This speeds up rebuilds.
+---
+"RUN npm install" Installs all dependencies.
+---
+"COPY . ." This copies all the source files after everything is installed.
+---
+"EXPOSE 3000" This opens a port so that it is accessible via local machine.
+---
+"CMD ["npm", "run", "dev"]" This is one way to quickly start up the website on a local machine.
+---
+## Networking
 
+There are two containers being created: app and db. The app container runs the Next.js website and db runs the Supabase (or Postgres) database. 
+
+This project utilizes a bridge network for the containers to communicate. This is done by using service names (app and db). They are accesible on different ports: app - 3000 and db - 5432. 
