@@ -18,8 +18,9 @@ flowchart LR
 
 # CSC468 - Project Deliverable 2
 
-##Build Process
+## Build Process
 
+Dockerfile:
 ```dockerfile
 FROM node:20-alpine
 WORKDIR /app
