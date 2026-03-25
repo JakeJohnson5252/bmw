@@ -73,8 +73,8 @@ export default function Home() {
                 <Link href="/estimate" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
                   Book an Estimate
                 </Link>
-                <Link href="/login" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
-                  Admin Dashboard
+                <Link href="/full-gallery" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Gallery
                 </Link>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function Home() {
               <div className="flex gap-3 flex-wrap">
                 <Link href="/quote" className={primaryButton}>Request a Quote</Link>
                 <Link href="/estimate" className={primaryButton}>Book an Estimate</Link>
-                <Link href="/login" className={primaryButton}>Admin Dashboard</Link>
+                <Link href="/full-gallery" className={primaryButton}>Gallery</Link>
               </div>
             </div>
           )}
