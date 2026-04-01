@@ -27,7 +27,7 @@ export default function Home() {
 
  
   return (
-    <div className={`mx-auto min-h-screen flex-col font-sans text-zinc-900 dark:text-zinc-100
+    <div className={`scroll-smooth mx-auto min-h-screen flex-col font-sans text-zinc-900 dark:text-zinc-100
       bg-gradient-to-b from-emerald-50 via-white to-zinc-100 dark:from-zinc-950 dark:via-black dark:to-black
       ${phoneMode ? "max-w-[375px] border-x border-emerald-300 dark:border-zinc-800" : ""}`}>
 
@@ -68,17 +68,20 @@ export default function Home() {
               {/* Main action buttons */}
               <div className="flex flex-wrap justify-center gap-3 mt-2">
                 <Link href="/quote" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
-                  Request a Quote
-                </Link>
-                <Link href="/estimate" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
                   Book an Estimate
                 </Link>
-                <Link href="/full-gallery" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                <Link href="#gallery" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
                   Gallery
+                </Link>
+                <Link href="#services" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Services
+                </Link>
+                <Link href="#testimonials" className={`${primaryButton} sm:px-6 sm:py-3 px-3 py-2 text-xs sm:text-sm`}>
+                  Testimonials
                 </Link>
               </div>
             </div>
-          )}
+          )} 
 
           {/* PC mode buttons stay on the right */}
           {!phoneMode && (
@@ -99,9 +102,10 @@ export default function Home() {
               </div>
 
               <div className="flex gap-3 flex-wrap">
-                <Link href="/quote" className={primaryButton}>Request a Quote</Link>
-                <Link href="/estimate" className={primaryButton}>Book an Estimate</Link>
-                <Link href="/full-gallery" className={primaryButton}>Gallery</Link>
+                <Link href="/quote" className={primaryButton}>Book an Estimate</Link>
+                <Link href="#services" className={primaryButton}>Services</Link>
+                <Link href="#gallery" className={primaryButton}>Gallery</Link>
+                <Link href="#testimonials" className={primaryButton}>Testimonials</Link>
               </div>
             </div>
           )}
@@ -145,10 +149,7 @@ export default function Home() {
 
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link href="/quote" className={primaryButton}>
-                  Get a Free Quote
-                </Link>
-                <Link href="/estimate" className={primaryButton}>
-                  Book an Estimate
+                  Get a Free Estimate
                 </Link>
               </div>
             </div>
@@ -157,7 +158,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="px-6 py-24">
+      <section id="services" className="px-6 py-24">
         <div className="mx-auto max-w-6xl bg-emerald-600 rounded-3xl shadow-2xl px-8 py-16">
 
           <h3 className="text-4xl font-bold text-center text-white mb-14 border-b-4 border-white inline-block pb-2">
@@ -195,7 +196,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section id="gallery" className="mx-auto max-w-6xl px-6 py-20">
         <h3 className="text-4xl font-bold text-center mb-12 border-b-4 border-emerald-500 inline-block pb-2">Gallery</h3>
         
         {/* Display first 4 images */}
@@ -246,7 +247,7 @@ export default function Home() {
 
 
       {/* Testimonials Section */}
-      <section className="bg-emerald-50 dark:bg-zinc-950 py-20">
+      <section id="testimonials" className="bg-emerald-50 dark:bg-zinc-950 py-20">
         <div className="max-w-6xl mx-auto px-6">
           {/* Section Title */}
           <h3 className="text-4xl font-bold text-center mb-12 border-b-4 border-emerald-500 inline-block pb-2">
@@ -282,7 +283,7 @@ export default function Home() {
           <div>
             <h4 className="mb-3 font-semibold">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/quote" className="hover:text-emerald-600 transition">Request Quote</Link></li>
+              <li><Link href="/quote" className="hover:text-emerald-600 transition">Request an Estimate</Link></li>
               <li><Link href="/login" className="hover:text-emerald-600 transition">Admin Dashboard</Link></li>
               <li><Link href="/" className="hover:text-emerald-600 transition">Home</Link></li>
             </ul>
