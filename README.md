@@ -85,17 +85,31 @@ This project utilizes a bridge network for the containers to communicate. This i
 
 # CSC468 - Project Deliverable 3 - Final Documentation
 
-This guide explains how to run and deploy this application on a CloudLab vm using Docker and Docker-Compose. 
+Video of Demonstration: 
 
-## Project Overview
+## Features
+## Requirements
+
+## Overview of Built Containers
 
 This project consists of two services: app and db.
 
-app represents the Next.js application (runs on port 3000)
-db represents the PostgreSQL databse (runs on port 5432)
+ - app represents the Next.js application (runs on port 3000)
+ 
+ - db represents the PostgreSQL databse (runs on port 5432)
 
 These services communicate over a Docker network using service names (see above under Networking).
 
-## How to Deploy Using CloudLab
+## How to Build and Deploy Using CloudLab and Docker
 
-
+1.) In CloudLab, locate "Experiments" at the top and select "Create Experiment Profile"
+2.) Create a name and select "git repo" for "Source code" (For the Project section, cloud-edu is selected)
+3.) Paste the URL from this repo into the input: "https://github.com/JakeJohnson5252/bmw.git"
+4.) Create the experiment and Instantiate it
+5.) After instantiation, "ssh" into the experiment using a terminal (I used the Docker Desktop terminal in video)
+6.) Clone the repo and get into the right directory: 
+``` git clone https://github.com/JakeJohnson5252/bmw.git
+cd bmw ```
+7.) Now we can build and start the two containers: "sudo docker-compose up -d --build"
+8.) To see if containers are running type "docker ps". There should be two containers running: bmw_app_1 and bmw_db_1
+9.) To test the connection, type "sudo docker exec -it bmw_app_1 sh" 
