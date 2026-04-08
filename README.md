@@ -139,6 +139,7 @@ There should be two containers running: bmw_app_1 and bmw_db_1
 9.) To test the connection (Crt-C to stop pinging and exit to exit the container)
 ```
 sudo docker exec -it bmw_app_1 sh
+nc -zv db 5432
 ping db
 ``` 
 10.) To open the bmw_app_1 container in a browser
