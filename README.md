@@ -117,11 +117,14 @@ These services communicate over a Docker network using service names (see above 
 
 5.) After instantiation, "ssh" into the experiment using a terminal (I used the Docker Desktop terminal in video)
 
-6.) Clone the repo and get into the right directory: 
+6.) Clone the repo and get into the right directory and make sure docker+docker-compose is installed: 
 ```
 git clone https://github.com/JakeJohnson5252/bmw.git
 cd bmw
+sudo apt install docker
+sudo apt install docker-compose
 ```
+
 7.) Now we can build and start the two containers
 ```
 sudo docker-compose up -d --build
