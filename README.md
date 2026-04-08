@@ -82,5 +82,17 @@ There are two containers being created: app and db. The app container runs the N
 
 This project utilizes a bridge network for the containers to communicate. This is done by using service names (app and db). They are locally available on different ports: app - 3000 and db - 5432. 
 
+---
 # CSC468 - Project Deliverable 3 - Final Documentation
+---
+This guide explains how to run and deploy this application on a CloudLab vm using Docker and Docker-Compose. 
+---
+## Project Overview
+---
+This project consists of two services: app and db.
+---
+
+
+## How to Deploy Using CloudLab
+
 
