@@ -103,13 +103,20 @@ These services communicate over a Docker network using service names (see above 
 ## How to Build and Deploy Using CloudLab and Docker
 
 1.) In CloudLab, locate "Experiments" at the top and select "Create Experiment Profile"
+
 2.) Create a name and select "git repo" for "Source code" (For the Project section, cloud-edu is selected)
+
 3.) Paste the URL from this repo into the input: "https://github.com/JakeJohnson5252/bmw.git"
+
 4.) Create the experiment and Instantiate it
+
 5.) After instantiation, "ssh" into the experiment using a terminal (I used the Docker Desktop terminal in video)
+
 6.) Clone the repo and get into the right directory: 
-``` git clone https://github.com/JakeJohnson5252/bmw.git
-cd bmw ```
+```
+git clone https://github.com/JakeJohnson5252/bmw.git
+cd bmw
+```
 7.) Now we can build and start the two containers: "sudo docker-compose up -d --build"
 8.) To see if containers are running type "docker ps". There should be two containers running: bmw_app_1 and bmw_db_1
 9.) To test the connection, type "sudo docker exec -it bmw_app_1 sh" 
