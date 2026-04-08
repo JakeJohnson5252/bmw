@@ -132,7 +132,7 @@ sudo docker-compose up -d --build
 
 8.) To see if containers are running type
 ```
-docker ps
+sudo docker ps
 ```
 There should be two containers running: bmw_app_1 and bmw_db_1
 
