@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Link to website: https://bmlw.vercel.app/
 
 
@@ -31,10 +30,6 @@ COPY . .
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
 ```
-
-
-=======
-Link to website: https://bmlw.vercel.app/
 
 
 # CSC468 - Project Deliverable 1
@@ -86,4 +81,6 @@ All commands after "WORKDIR /app" will run in /app.
 There are two containers being created: app and db. The app container runs the Next.js website and db runs the Supabase (or Postgres) database. 
 
 This project utilizes a bridge network for the containers to communicate. This is done by using service names (app and db). They are locally available on different ports: app - 3000 and db - 5432. 
->>>>>>> c20dcc622e616f6a1310356848cb02957ae93086
+
+# CSC468 - Project Deliverable 3 - Final Documentation
+
