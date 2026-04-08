@@ -117,6 +117,24 @@ These services communicate over a Docker network using service names (see above 
 git clone https://github.com/JakeJohnson5252/bmw.git
 cd bmw
 ```
-7.) Now we can build and start the two containers: "sudo docker-compose up -d --build"
-8.) To see if containers are running type "docker ps". There should be two containers running: bmw_app_1 and bmw_db_1
-9.) To test the connection, type "sudo docker exec -it bmw_app_1 sh" 
+7.) Now we can build and start the two containers
+```
+sudo docker-compose up -d --build
+```
+
+8.) To see if containers are running type
+```
+docker ps
+```
+There should be two containers running: bmw_app_1 and bmw_db_1
+
+9.) To test the connection (Crt-C to stop pinging and exit to exit the container)
+```
+sudo docker exec -it bmw_app_1 sh
+ping db
+``` 
+10.) To open the bmw_app_1 container in a browser
+```
+hostname -I
+```
+Use the first IP address in the output and type this into your browser: "http://IPADDRESS:3000"
