@@ -87,8 +87,13 @@ This project utilizes a bridge network for the containers to communicate. This i
 
 Video of Demonstration: 
 
-## Features
 ## Requirements
+
+- Docker version 29.2.1+
+- Docker Compose version v5.1.0+
+- Next.js 11.7.0+
+- PostgreSQL 15+
+- Ports 3000 and 5432 must be accesible
 
 ## Overview of Built Containers
 
@@ -137,4 +142,4 @@ ping db
 ```
 hostname -I
 ```
-Use the first IP address in the output and type this into your browser: "http://IPADDRESS:3000"
+Use the first IP address in the output to insert into the link and type this into your browser: "http://useoutput:3000"
