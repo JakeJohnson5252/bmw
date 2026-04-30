@@ -18,18 +18,9 @@ export default function ThankYouClient() {
           Your quote request has been received. 
         </p>
 
-        {quoteNumber ? (
-          <p className="mb-6 text-lg font-bold text-emerald-600">
-            Quote Number: {quoteNumber}
-          </p>
-        ) : (
-          <p className="mb-6 text-sm text-red-500">
-            Unable to retrieve your quote number.
-          </p>
-        )}
 
         <p className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
-          Please save this number. You will need it when booking your estimate.
+          We will reach out to you as soon as we can!
         </p>
 
         <Link

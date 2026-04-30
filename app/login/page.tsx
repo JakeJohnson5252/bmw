@@ -12,7 +12,7 @@ export default function AdminLogin() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '1';
+  const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'mulchh';
 
   useEffect(() => {
     // Check if session exists and is still valid

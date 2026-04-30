@@ -15,7 +15,7 @@ type Quote = {
   message: string;
   status: string;
   created_at: string;
-};
+}; 
 
 export default function AdminPage() {
   const [quotes, setQuotes] = useState<Quote[]>([]);

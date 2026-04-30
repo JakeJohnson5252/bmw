@@ -14,10 +14,12 @@ export default function FullGallery() {
     "rounded-md border border-emerald-300/60 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900";
 
   const galleryImages = [
-    "/before.jpg","/after.jpg","/pwbefore.jpeg","/pwafter.jpeg",
+
+    "/after.jpg","/before.jpg","/pwafter.jpeg","/pwbefore.jpeg",
     "/mulching1.jpg","/mulching2.jpg","/powerwashing1.jpg",
     "/mulching3.jpg","/mulching4.jpg","/trimming.jpg",
     "/mulching5.jpg","/mulching6.jpg"
+  
   ];
 
   return (

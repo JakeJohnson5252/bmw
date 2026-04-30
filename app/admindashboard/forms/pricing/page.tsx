@@ -1,9 +1,107 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function PricingPage() {
-  const card = "bg-white dark:bg-zinc-900 p-5 rounded-xl shadow-md space-y-2";
+  const card = "bg-white dark:bg-zinc-900 p-5 rounded-xl shadow-md space-y-3";
+
+  const [pricing, setPricing] = useState<any[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState<number>(0);
+
+  // ------------------------
+  // LOAD PRICING
+  // ------------------------
+  const fetchPricing = async () => {
+    const { data } = await supabase.from("pricing").select("*");
+    if (data) setPricing(data);
+  };
+
+  useEffect(() => {
+    fetchPricing();
+  }, []);
+
+  // ------------------------
+  // SAVE UPDATE
+  // ------------------------
+  const savePrice = async (id: string) => {
+    const { error } = await supabase
+      .from("pricing")
+      .update({ value: editValue })
+      .eq("id", id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setEditingId(null);
+    fetchPricing();
+  };
+
+  // ------------------------
+  // GROUP DATA
+  // ------------------------
+  const grouped = pricing.reduce((acc: any, item: any) => {
+    if (!acc[item.category]) acc[item.category] = [];
+    acc[item.category].push(item);
+    return acc;
+  }, {});
+
+  // ------------------------
+  // RENDER PRICE ROW
+  // ------------------------
+  const renderItem = (item: any) => {
+    const isEditing = editingId === item.id;
+
+    return (
+      <div
+        key={item.id}
+        className="flex justify-between items-center border-b py-1"
+      >
+        <span className="capitalize">{item.key.replaceAll("_", " ")}</span>
+
+        <div className="flex items-center gap-2">
+          {isEditing ? (
+            <>
+              <input
+                type="number"
+                value={editValue}
+                onChange={(e) => setEditValue(Number(e.target.value))}
+                className="w-20 p-1 border rounded"
+              />
+              <button
+                onClick={() => savePrice(item.id)}
+                className="text-green-600 font-semibold"
+              >
+                Save
+              </button>
+            </>
+          ) : (
+            <>
+              <span>${item.value}</span>
+              <button
+                onClick={() => {
+                  setEditingId(item.id);
+                  setEditValue(item.value);
+                }}
+                className="text-blue-600 text-sm"
+              >
+                Edit
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-950">
@@ -13,6 +111,7 @@ export default function PricingPage() {
         <h1 className="text-2xl font-bold">
           <Link href="/">B&M Landscaping</Link>
         </h1>
+
         <div className="flex gap-3">
           <Link href="/admindashboard/forms/new-job" className="navBtn">New Job</Link>
           <Link href="/admindashboard/forms/pricing" className="navBtn">Pricing</Link>
@@ -22,71 +121,31 @@ export default function PricingPage() {
       </header>
 
       <main className="max-w-5xl mx-auto p-6 space-y-8">
-        <h1 className="text-3xl font-bold text-center">Pricing Breakdown</h1>
 
-        {/* LABOR */}
+        <h1 className="text-3xl font-bold text-center">
+          Pricing Editor
+        </h1>
+
+        {/* LABOR (static) */}
         <div className={card}>
           <h2 className="text-xl font-semibold">Labor</h2>
           <p>$20 per hour per worker</p>
         </div>
 
-        {/* SHADY BROOKE */}
-        <div className={card}>
-          <h2 className="text-xl font-semibold">Shady Brooke Farms</h2>
-          <p className="text-sm text-zinc-500">
-            931 Stony Hill Road, Yardley, PA 19067
-          </p>
+        {/* DYNAMIC PRICING FROM SUPABASE */}
+        {Object.keys(grouped).map((category) => (
+          <div key={category} className={card}>
+            <h2 className="text-xl font-semibold capitalize mb-2">
+              {category}
+            </h2>
 
-          <div>
-            <h3 className="font-semibold">Mulch</h3>
-            <p>Black Triple Shred: $45 / yard</p>
-            <p>Natural Brown: $35 / yard</p>
+            {grouped[category].map(renderItem)}
           </div>
+        ))}
 
-          <div>
-            <h3 className="font-semibold">Dumping</h3>
-            <p>Soil Dump: $32.50 / dump</p>
-            <p>Brush Dump: $32.50 / dump</p>
-          </div>
-        </div>
-
-        {/* OUTDOOR */}
+        {/* STATIC RULES */}
         <div className={card}>
-          <h2 className="text-xl font-semibold">Outdoor Landscape Supply</h2>
-          <p className="text-sm text-zinc-500">
-            149 Falls Tullytown Rd, Levittown, PA 19054
-          </p>
-
-          <div>
-            <h3 className="font-semibold">Mulch</h3>
-            <p>Black Triple Shred: $34.25 / yard</p>
-            <p>Brown: $34.25 / yard</p>
-          </div>
-        </div>
-
-        {/* SPARKS */}
-        <div className={card}>
-          <h2 className="text-xl font-semibold">Sparks</h2>
-          <p className="text-sm text-zinc-500">
-            2616 Richland Rd, Jamison, PA 18929
-          </p>
-
-          <div>
-            <h3 className="font-semibold">Dumping</h3>
-            <p>Brush Dump: $20 / dump</p>
-          </div>
-        </div>
-
-        {/* GAS */}
-        <div className={card}>
-          <h2 className="text-xl font-semibold">Gas / Travel</h2>
-          <p>Ram 1500: $0.85 per mile</p>
-          <p>Tacoma: $0.80 per mile</p>
-        </div>
-
-        {/* MISC + PROFIT */}
-        <div className={card}>
-          <h2 className="text-xl font-semibold">Additional Costs</h2>
+          <h2 className="text-xl font-semibold">Additional Rules</h2>
           <p>Miscellaneous: 10% of job total</p>
           <p className="text-emerald-600 font-semibold">
             Profit Margin: +50%

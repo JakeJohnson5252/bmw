@@ -157,10 +157,10 @@ export default function Quote() {
             >
               <option value="">Select a service</option>
               <option value="Mulching">Mulching</option>
-              <option value="Weeding">Weeding</option>
-              <option value="Lawn Care">Lawn Care</option>
+              <option value="Lawn Care/Mowing">Lawn Care/Mowing</option>
               <option value="Maintenance">Maintenance</option>
               <option value="Power Washing">Power Washing</option>
+              <option value="Trimming">Trimming</option>
               <option value="Other">Other</option>
             </select>
           </div>

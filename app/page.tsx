@@ -16,13 +16,13 @@ export default function Home() {
     "rounded-md border border-emerald-300/60 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900";
 
   const services = [
-    { title: "Weeding", description: "Keep your garden pristine with expert weeding.", img: "/weeding.jpg" },
+    { title: "Trimming", description: "Keep plants and hedges neat with precise trimming.", img: "/trimming.jpg" },
     { title: "Mulching", description: "Enhance soil health and appearance with mulching.", img: "/mulching.jpg" },
     { title: "Power Washing", description: "Restore surfaces to their original shine.", img: "/powerwashing.jpg" },
     { title: "Mowing", description: "Perfectly manicured lawns every time.", img: "/mowedlawn.jpg" },
   ];
 
-  const galleryImages = ["/before.jpg","/after.jpg","/pwbefore.jpeg","/pwafter.jpeg", "/mulching1.jpg", "/mulching2.jpg", "/powerwashing1.jpg", "/mulching3.jpg", "/mulching4.jpg", "/trimming.jpg", "/mulching5.jpg", "/mulching6.jpg"];
+  const galleryImages = ["/after.jpg","/before.jpg","/pwafter.jpeg","/pwbefore.jpeg", "/mulching1.jpg", "/mulching2.jpg", "/powerwashing1.jpg", "/mulching3.jpg", "/mulching4.jpg", "/trimming.jpg", "/mulching5.jpg", "/mulching6.jpg"];
 
 
  
@@ -192,7 +192,14 @@ export default function Home() {
             ))}
           </div>
 
+         
+          {/* NEW: Other / Requests Section */}
+        <div className="mt-12 text-center">
+          <p className="text-white text-lg">
+            Have something else in mind? Let us know—we are happy to work with your specific needs.
+          </p>
         </div>
+         </div>
       </section>
 
       {/* Gallery Section */}
