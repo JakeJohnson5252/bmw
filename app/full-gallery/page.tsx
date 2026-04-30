@@ -18,7 +18,7 @@ export default function FullGallery() {
     "/after.jpg","/before.jpg","/pwafter.jpeg","/pwbefore.jpeg",
     "/mulching1.jpg","/mulching2.jpg","/powerwashing1.jpg",
     "/mulching3.jpg","/mulching4.jpg","/trimming.jpg",
-    "/mulching5.jpg","/mulching6.jpg", "/example.jpg","/Picture1.png"
+    "/mulching5.jpg","/mulching6.jpg"
   
   ];
 
