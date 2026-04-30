@@ -41,8 +41,8 @@ export default function AdminDashboard() {
           Use the navigation above to manage quotes or go back to the homepage.
         </p>
         <p className="text-zinc-600 dark:text-zinc-400">
-          Here is a link to a video to show how to add photos to the gallery:
-          
+          Here is a link to a video to show how to add photos to the gallery: https://youtu.be/gt6sxOOKBys
+
         </p>
       </main>
     </div>
